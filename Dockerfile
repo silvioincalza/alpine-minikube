@@ -1,5 +1,4 @@
-FROM alpine:3.6
-MAINTAINER William Hindes <bhindes@hotmail.com>
+FROM alpine:latest
 
 ENV GOPATH="/usr/bin"
 ENV GOROOT="/usr/lib/go"
@@ -12,7 +11,7 @@ wget "https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/linux
 mkdir -p /usr/bin/src/k8s.io && cd /usr/bin/src/k8s.io && chmod +x /usr/local/bin/kubectl && \
 git clone https://github.com/kubernetes/minikube && cd minikube && \
 make && mv ./out/minikube /usr/local/bin/minikube && rm -rf /usr/bin/src/k8s.io && rm -rf /tmp/* && \
-minikube start --vm-driver none --kubernetes-version v1.7.5 -v 7 --memory 1024 --disk-size 4g && \
+minikube start --vm-driver none --memory 2024 --disk-size 20g && \
 apk del .build-dependencies
 ADD ./dockerd-entrypoint.sh /usr/local/bin/
 ADD ./dockerd-cmd.sh /usr/local/bin/
